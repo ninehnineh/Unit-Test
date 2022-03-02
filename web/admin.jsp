@@ -46,37 +46,37 @@
                     </thead>
                     <tbody>
                         <c:forEach var="user" varStatus="counter" items="${requestScope.LIST_USER}">
-                        <form action="MainController">
-                            <tr>
-                                <td>${counter.count}</td>
-                                <td>
-                                    <input type="text" name="userID" value="${user.userID}" readonly=""/>
-                                </td>
-                                <td>
-                                    <input type="text" name="fullName" value="${user.fullName}" required="" />
-                                </td>
-                                <td>
-                                    <input type="text" name="roleID" value="${user.roleID}" required="" />
-                                </td>
-                                <td>${user.password}</td>
-                                <td>${user.status}</td>
-                                <td>
-                                    <c:url var="deleteLink" value="MainController">
-                                        <c:param name="action" value="Delete"></c:param>
-                                        <c:param name="search" value="${param.search}"></c:param>
-                                        <c:param name="userID" value="${user.userID}"></c:param>
-                                    </c:url>
-                                    <a href="${deleteLink}">Delete</a>
-                                </td>
-                                <td>
-                                    <input type="submit" name="action" value="Update"/>
-                                    <input type="hidden" name="search" value="${param.search}"/>
-                                </td> 
-                            </tr>
-                        </form>
-                    </c:forEach>
-                </tbody>
-            </table>
+                            <form action="MainController">
+                                <tr>
+                                    <td>${counter.count}</td>
+                                    <td>
+                                        <input type="text" name="userID" value="${user.userID}" readonly=""/>
+                                    </td>
+                                    <td>
+                                        <input type="text" name="fullName" value="${user.fullName}" required="" />
+                                    </td>
+                                    <td>
+                                        <input type="text" name="roleID" value="${user.roleID}" required="" />
+                                    </td>
+                                    <td>${user.password}</td>
+                                    <td>${user.status}</td>
+                                    <td>
+                                        <c:url var="deleteLink" value="MainController">
+                                            <c:param name="action" value="Delete"></c:param>
+                                            <c:param name="search" value="${param.search}"></c:param>
+                                            <c:param name="userID" value="${user.userID}"></c:param>
+                                        </c:url>
+                                        <a href="${deleteLink}">Delete</a>
+                                    </td>
+                                    <td>
+                                        <input type="submit" name="action" value="Update"/>
+                                        <input type="hidden" name="search" value="${param.search}"/>
+                                    </td> 
+                                </tr>
+                            </form>
+                        </c:forEach>
+                    </tbody>
+                </table>
         </c:if>
     </c:if>
 </body>

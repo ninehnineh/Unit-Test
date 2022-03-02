@@ -36,8 +36,10 @@ public class UpdateController extends HttpServlet {
             DTO user = new DTO(userID, fullName, roleID, "", true);
             DAO dao = new DAO();
             boolean check =dao.update(user);
+            
             if (check) {
                 HttpSession session = request.getSession();
+                session.setAttribute("UPDATE_USER", user);
                 DTO loginUser = (DTO) session.getAttribute("LOGIN_USER");
                 if (userID.equals(loginUser.getUserID())) {
                     loginUser= dao.getUserInfor(userID);

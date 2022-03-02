@@ -49,7 +49,6 @@ public class LoginController extends HttpServlet {
                 }
             } else {
                 request.setAttribute("ERROR_MESSAGE", "Incorrect UserID or Password!");
-
             }
         } catch (Exception e) {
             log("error at LoginController:" + e.toString());

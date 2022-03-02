@@ -1,9 +1,3 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Context antiJARLocking="true" path="/prj3w_jstl">
-    <Resource name="DBCon" auth="Container" type="javax.sql.DataSource"
-                username="chinh" password="123123123"
-                driverClassName="com.microsoft.sqlserver.jdbc.SQLServerDriver"
-                url="jdbc:sqlserver://localhost:1433;databaseName=UserManagement">        
-    </Resource>
-</Context>
-
+<Context antiJARLocking="true" path="/TestNG-SWT"/>
+  

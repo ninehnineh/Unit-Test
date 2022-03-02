@@ -24,11 +24,11 @@ public class DAO {
     private static final String SEARCH = " SELECT userID, fullName, roleID, status FROM tblUsers WHERE fullName like ?";
     private static final String DELETE = " UPDATE tblUsers SET status=? WHERE userID=? ";
     private static final String UPDATE = " UPDATE tblUsers SET fullName=?, roleID=? WHERE userID=? ";
-    private static final String USER_INFO = " SELECT fullName, roleID, status FROM tblUsers WHERE userID=? ";
+    private static final String USER_INFO = " SELECT fullName, roleID, status FROM tblUsers WHERE userID = ? ";
     private static final String CHECK_DUPLICATE = " SELECT userID FROM tblUsers WHERE userID=? ";
     private static final String INSERT = " INSERT INTO tblUsers( userID, fullName, roleID, password, status) VALUES (?,?,?,?,?) ";
 
-    public DTO checkLogin(String userID, String pass) throws SQLException {
+    public DTO checkLogin(String userID, String pass) throws SQLException, Exception {
 
         DTO user = null;
         Connection conn = null;
@@ -48,7 +48,7 @@ public class DAO {
                     String roleID = rs.getString("roleID");
                     boolean status = rs.getBoolean("status");
                     user = new DTO(userID, fullName, roleID, "", status);
-                }
+                } 
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -67,7 +67,7 @@ public class DAO {
         return user;
     }
 
-    public List<DTO> getListUser(String search) throws SQLException {
+    public List<DTO> getListUser(String search) throws SQLException, Exception {
         List<DTO> List = new ArrayList<>();
         Connection conn = null;
         PreparedStatement stm = null;
@@ -88,7 +88,7 @@ public class DAO {
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            throw new Exception();
         } finally {
             if (rs != null) {
                 rs.close();
@@ -104,12 +104,10 @@ public class DAO {
         return List;
     }
 
-    public boolean deleteUser(String userID) throws SQLException {
+    public boolean deleteUser(String userID) throws SQLException, Exception {
         boolean check = false;
-
         Connection conn = null;
         PreparedStatement stm = null;
-
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
@@ -118,9 +116,8 @@ public class DAO {
                 stm.setString(2, userID);
                 check = stm.executeUpdate() > 0 ? true : false;
             }
-
         } catch (Exception e) {
-            e.printStackTrace();
+            throw new Exception();
         } finally {
             if (stm != null) {
                 stm.close();
@@ -132,7 +129,7 @@ public class DAO {
         return check;
     }
 
-    public boolean update(DTO user) throws SQLException {
+    public boolean update(DTO user) throws SQLException, Exception {
         boolean check = false;
         Connection conn = null;
         PreparedStatement stm = null;
@@ -146,7 +143,7 @@ public class DAO {
                 check = stm.executeUpdate() > 0 ? true : false;
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            throw new Exception();
         } finally {
             if (stm != null) {
                 stm.close();
@@ -158,7 +155,7 @@ public class DAO {
         return check;
     }
 
-    public DTO getUserInfor(String userID) throws SQLException {
+    public DTO getUserInfor(String userID) throws SQLException, Exception {
 
         DTO user = null;
         Connection conn = null;
@@ -176,10 +173,12 @@ public class DAO {
                     String roleID = rs.getString("roleID");
                     boolean status = rs.getBoolean("status");
                     user = new DTO(userID, fullName, roleID, "", status);
+                } else {
+                    throw new Exception();
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            throw new Exception();
         } finally {
             if (rs != null) {
                 rs.close();
@@ -195,7 +194,7 @@ public class DAO {
         return user;
     }
 
-    public boolean checkDuplicate(String userID) throws SQLException {
+    public boolean checkDuplicate(String userID) throws SQLException, Exception {
         boolean check = false;
         Connection conn = null;
         PreparedStatement stm = null;
@@ -211,6 +210,7 @@ public class DAO {
                 }
             }
         } catch (Exception e) {
+            throw new Exception();
         } finally {
             if (rs != null) {
                 rs.close();
@@ -225,7 +225,7 @@ public class DAO {
         return check;
     }
 
-    public boolean Insert(DTO user) throws SQLException {
+    public boolean Insert(DTO user) throws SQLException, Exception {
         boolean check = false;
         Connection conn = null;
         PreparedStatement stm = null;
@@ -233,12 +233,12 @@ public class DAO {
             conn = DBUtils.getConnection();
             if (conn != null) {
                 stm = conn.prepareStatement(INSERT);
-                stm.setString(1, user.getUserID());
+                stm.setString(1, user.getUserID().trim());
                 stm.setString(2, user.getFullName());
                 stm.setString(3, user.getRoleID());
                 stm.setString(4, user.getPassword());
                 stm.setBoolean(5, user.isStatus());
-                check = stm.executeUpdate()>0 ? true:false;
+                check = stm.executeUpdate() > 0 ? true : false;
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -252,30 +252,31 @@ public class DAO {
         }
         return check;
     }
-    
-    public boolean InsertV2(DTO user) throws SQLException, ClassNotFoundException, NamingException {
-        boolean check = false;
-        Connection conn = null;
-        PreparedStatement stm = null;
-        try {
-            conn = DBUtils.getConnection();
-            if (conn != null) {
-                stm = conn.prepareStatement(INSERT);
-                stm.setString(1, user.getUserID());
-                stm.setString(2, user.getFullName());
-                stm.setString(3, user.getRoleID());
-                stm.setString(4, user.getPassword());
-                stm.setBoolean(5, user.isStatus());
-                check = stm.executeUpdate()>0 ? true:false;
-            }
-        }  finally {
-            if (stm != null) {
-                stm.close();
-            }
-            if (conn != null) {
-                conn.close();
-            }
-        }
-        return check;
-    }
+
+    //ko co catch exception
+//    public boolean Insert2(DTO user) throws SQLException, ClassNotFoundException, NamingException {
+//        boolean check = false;
+//        Connection conn = null;
+//        PreparedStatement stm = null;
+//        try {
+//            conn = DBUtils.getConnection();
+//            if (conn != null) {
+//                stm = conn.prepareStatement(INSERT);
+//                stm.setString(1, user.getUserID());
+//                stm.setString(2, user.getFullName());
+//                stm.setString(3, user.getRoleID());
+//                stm.setString(4, user.getPassword());
+//                stm.setBoolean(5, user.isStatus());
+//                check = stm.executeUpdate()>0 ? true:false;
+//            }
+//        }  finally {
+//            if (stm != null) {
+//                stm.close();
+//            }
+//            if (conn != null) {
+//                conn.close();
+//            }
+//        }
+//        return check;
+//    }
 }

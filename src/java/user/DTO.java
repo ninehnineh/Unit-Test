@@ -33,6 +33,13 @@ public class DTO {
         this.status = status;
     }
 
+    public DTO(String userID, String password) {
+        this.userID = userID;
+        this.password = password;
+    }
+    
+    
+
     public String getUserID() {
         return userID;
     }

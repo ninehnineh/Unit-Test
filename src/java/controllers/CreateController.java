@@ -44,7 +44,7 @@ public class CreateController extends HttpServlet {
                 checkValidation = false;
                 userError.setUserIDError("UserID must be in[3,10]!");
             }
-    //        boolean checkDuplicate = dao.checkDuplicate(userID);
+           boolean checkDuplicate = dao.checkDuplicate(userID);
 //            if (checkDuplicate) {
 //                checkValidation = false;
 //                userError.setUserIDError("Duplicate userID!");
@@ -60,7 +60,7 @@ public class CreateController extends HttpServlet {
             if (checkValidation) {
                 DTO user = new DTO(userID, fullName, roleID, password, true);
 //                boolean checkInsert = dao.Insert(user);
-                boolean checkInsert = dao.InsertV2(user);
+                boolean checkInsert = dao.Insert(user);
                 if (checkInsert) {
                     url = SUCCESS;
                 }
