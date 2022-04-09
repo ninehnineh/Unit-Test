@@ -45,6 +45,14 @@
 ![Invalid](https://github.com/ninehnineh/Unit-Test/blob/67702edbb27dbe1829752a0efeaa2226dcf1f663/screenshots/insert-invalid.png)
 #### We use assertEquals() to check method Insert()
 #### Expected: Insert() return false, because userId is too long and userId is existed
-#### Actual: false, can insert into DB
+#### Actual: false, cant insert into DB
 #### Result:
 ![resutl-inval](https://github.com/ninehnineh/Unit-Test/blob/c4d2ade2a07e1b8f64dbb3ec3f89ea0e49bf98c1/screenshots/result-insert-inval.png)
+## In conclusion, Insert () aims to insert a new user into the system. In this test, we already checked 4 values, 2 valid, 2 invalids, and see the behavior of Insert() method is matched with the expected
+
+# In comparison after testing two methods:
+* checkLogin() method we use two Dataprovider for two tests (1)
+* Insert() method we use just one Dataprovider for all tests (2) and if any method is added, we just need to add two lines:
+	- case "method" :
+	- return statement.
+# => to optimize we recommend use approach (2) instead of (1).
