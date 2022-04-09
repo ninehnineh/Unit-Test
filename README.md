@@ -31,5 +31,3 @@
 ![valid]()
 * Test insertUser with invalid value
 ![Invalid]()
-
-
