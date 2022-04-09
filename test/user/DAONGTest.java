@@ -86,7 +86,7 @@ public class DAONGTest {
         };
     }
 
-    @Test(dataProvider = "data-provider-invalid" )
+    @Test(dataProvider = "data-provider-invalid", enabled = false )
     public void testLoginWithInValidArgumentTest(String userid, String pass) throws SQLException, Exception {
         DAO dao = new DAO();
         DTO user = dao.checkLogin(userid, pass);
