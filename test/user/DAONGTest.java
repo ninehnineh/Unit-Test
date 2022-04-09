@@ -68,7 +68,7 @@ public class DAONGTest {
         };
     }
 
-    @Test(dataProvider = "data-provider-valid")
+    @Test(dataProvider = "data-provider-valid", enabled = false)
     public void testLoginWithValidArgumentTest(String userid, String pass) throws SQLException, Exception {
         DAO dao = new DAO();
         DTO user = dao.checkLogin(userid, pass);
@@ -86,7 +86,7 @@ public class DAONGTest {
         };
     }
 
-    @Test(dataProvider = "data-provider-invalid")
+    @Test(dataProvider = "data-provider-invalid" )
     public void testLoginWithInValidArgumentTest(String userid, String pass) throws SQLException, Exception {
         DAO dao = new DAO();
         DTO user = dao.checkLogin(userid, pass);
