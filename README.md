@@ -23,11 +23,13 @@
 #### Result:
 ![Green1](https://github.com/ninehnineh/Unit-Test/blob/482e228873af3e53eea0d4455b8735efd5d3b696/screenshots/result-invalid.png)
 ## In conclusion, the purpose of checkLogin() is to authenticate who the user is allowed to access to the system, after 2 test cases we have already tested 7 values that may be a user can enter, thus the behavior of  checkLogin() method is matched with the expected
-====================================================================================
+================================================================
 ### Insert
-Test case:
-* Test insertUser with valid value
-* Test insertUser with invalid value
-
 ![Insert](https://github.com/ninehnineh/Unit-Test/blob/41949d8fe4f7192c0479d8ac41c2bd2df87e1632/screenshots/Insert.png)
+####Test case:
+* Test insertUser with valid value
+![valid]()
+* Test insertUser with invalid value
+![Invalid]()
+
 
