@@ -60,7 +60,6 @@ public class DAONGTest {
         assertEquals(actual, expected);
     }
     
-
     @DataProvider(name = "data-provider-valid")
     public Object[][] dataProviderMethod() {
         return new Object[][]{
@@ -69,7 +68,6 @@ public class DAONGTest {
         };
     }
 
-
     @Test(dataProvider = "data-provider-valid", enabled = false)
     public void testLoginWithValidArgumentTest(String userid, String pass) throws SQLException, Exception {
         DAO dao = new DAO();
@@ -77,7 +75,6 @@ public class DAONGTest {
         assertNotNull(user);
     }
 
- 
     @DataProvider(name = "data-provider-invalid")
     public Object[][] dataProviderMethod1() {
         return new Object[][]{
