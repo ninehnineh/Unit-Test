@@ -25,8 +25,12 @@
 ## In conclusion, the purpose of checkLogin() is to authenticate who the user is allowed to access to the system, after 2 test cases we have already tested 7 values that may be a user can enter, thus the behavior of  checkLogin() method is matched with the expected
 ================================================================
 ### Insert
-![Insert](https://github.com/ninehnineh/Unit-Test/blob/41949d8fe4f7192c0479d8ac41c2bd2df87e1632/screenshots/Insert.png)
-####Test case:
+![Insert](https://github.com/ninehnineh/UnitTest/blob/41949d8fe4f7192c0479d8ac41c2bd2df87e1632/screenshots/Insert.png)
+#### We need 5 parameters to test above method: userId, fullName, password, roleId, status
+#### In this method, we use DataProviders with method as a Parameter
+#### Import Required: import java.lang.reflect.Method
+![switch](https://github.com/ninehnineh/Unit-Test/blob/83001eae4d8413a722da204e761625d325c41015/screenshots/ifel.png) 
+#### Test case:
 * Test insertUser with valid value
 ![valid]()
 * Test insertUser with invalid value

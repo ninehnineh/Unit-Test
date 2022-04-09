@@ -42,19 +42,19 @@ public class DAONGTest {
         return data;
     }
 
-    @Test(dataProvider = "data-provider", enabled = false)
-    public void testInsertUserWithValidValue(String data, String data1, String data2, String data3, boolean boo) throws SQLException, Exception {
+    @Test(dataProvider = "data-provider")
+    public void testInsertUserWithValidValue(String userId, String fullName, String password, String roleId, boolean status) throws SQLException, Exception {
         DAO dao = new DAO();
-        DTO user = new DTO(data, data1, data2, data3, boo);
+        DTO user = new DTO(userId, fullName, password, roleId, status);
         boolean expected = true;
         boolean actual = dao.Insert(user);
         assertEquals(actual, expected);
     }
 
-    @Test(dataProvider = "data-provider" , enabled = false)
-    public void testInsertUserWithInvalidValue(String data, String data1, String data2, String data3, boolean boo) throws SQLException, Exception {
+    @Test(dataProvider = "data-provider", enabled = false)
+    public void testInsertUserWithInvalidValue(String userId, String fullName, String password, String roleId, boolean status) throws SQLException, Exception {
         DAO dao = new DAO();
-        DTO user = new DTO(data, data1, data2, data3, boo);
+        DTO user = new DTO(userId, fullName, password, roleId, status);
         boolean expected = false;
         boolean actual = dao.Insert(user);
         assertEquals(actual, expected);
