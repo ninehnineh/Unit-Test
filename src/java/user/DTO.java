@@ -37,6 +37,10 @@ public class DTO {
         this.userID = userID;
         this.password = password;
     }
+
+    public DTO(String userID) {
+        this.userID = userID;
+    }
     
     
 

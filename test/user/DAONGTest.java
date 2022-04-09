@@ -21,25 +21,12 @@ public class DAONGTest {
     public Object[][] dataProviderMethod(Method method) {
         Object[][] data = null;
         switch (method.getName()) {
-            case "testLoginWithValidArgument"://1
-                data = new String[][]{
-                    {"admin", "1"},
-                    {"staff", "1"}};
-                break; 
-            case "testLoginWithInvalidArgument"://2
-                data = new String[][]{
-                    {"", ""},
-                    {"sv111", ""},
-                    {"", "1"},
-                    {"blabla", "1"},
-                    {"taolaotaolao", "1"}};
-                break;
-            case "testInsertUserWithValidValue"://3
+            case "testInsertUserWithValidValue":
                 data = new Object[][]{
-                    {"c12", "trinhcongtruong1", "1", "AD", true},
-                    {"c22", "trinhcongtruong12", "1", "AD", true}};
+                    {"n13", "trinhcongtruong1", "1", "AD", true},
+                    {"n23", "trinhcongtruong12", "1", "AD", true},};
                 break;
-            case "testInsertUserWithInvalidValue"://4
+            case "testInsertUserWithInvalidValue":
                 data = new Object[][]{
                     {"Lorem Ipsum is simply dummy text of the printing and typesetting"
                         + " industry. Lorem Ipsum has been the industry's"
@@ -48,122 +35,64 @@ public class DAONGTest {
                         + " it to make a type specimen book "
                         + "It has survived not only five centuries, but also the leap"
                         + " into electronic typesetting, remaining essentially unchanged",
-                        "trinhcongtruong123", "1","AD", true},
+                        "trinhcongtruong123", "1", "AD", true},
                     {"admin", "trinhcongtruong123", "1", "AD", true}};
                 break;
         }
         return data;
     }
-    
-    //1
+
     @Test(dataProvider = "data-provider")
-    public void testLoginWithValidArgument(String userID, String password) throws SQLException, Exception {
+    public void testInsertUserWithValidValue(String data, String data1, String data2, String data3, boolean boo) throws SQLException, Exception {
         DAO dao = new DAO();
-        DTO user = dao.checkLogin(userID, password);
+        DTO user = new DTO(data, data1, data2, data3, boo);
+        boolean expected = true;
+        boolean actual = dao.Insert(user);
+        assertEquals(actual, expected);
+    }
+
+    @Test(dataProvider = "data-provider")
+    public void testInsertUserWithInvalidValue(String data, String data1, String data2, String data3, boolean boo) throws SQLException, Exception {
+        DAO dao = new DAO();
+        DTO user = new DTO(data, data1, data2, data3, boo);
+        boolean expected = false;
+        boolean actual = dao.Insert(user);
+        assertEquals(actual, expected);
+    }
+    
+
+    @DataProvider(name = "data-provider-valid")
+    public Object[][] dataProviderMethod() {
+        return new Object[][]{
+            {"admin", "1"},
+            {"staff", "1"}
+        };
+    }
+
+
+    @Test(dataProvider = "data-provider-valid", enabled = false)
+    public void testLoginWithValidArgumentTest(String userid, String pass) throws SQLException, Exception {
+        DAO dao = new DAO();
+        DTO user = dao.checkLogin(userid, pass);
         assertNotNull(user);
     }
 
-    //2
-    @Test(dataProvider = "data-provider")
-    public void testLoginWithInvalidArgument(String userID, String password) throws SQLException, Exception {
-        DAO dao = new DAO();
-        DTO user = dao.checkLogin(userID, password);
-        assertNull(user);
+ 
+    @DataProvider(name = "data-provider-invalid")
+    public Object[][] dataProviderMethod1() {
+        return new Object[][]{
+            {"", ""},
+            {"sv111", ""},
+            {"", "1"},
+            {"blabla", "1"},
+            {"taolaotaolao", "1"}
+        };
     }
 
-    //3
-    @Test(dataProvider = "data-provider")
-    public void testInsertUserWithValidValue(String data, String data1, String data2, String data3, boolean boo) throws SQLException, Exception {
-        DTO user = new DTO(data, data1, data2, data3, boo);
+    @Test(dataProvider = "data-provider-invalid", enabled = false)
+    public void testLoginWithInValidArgumentTest(String userid, String pass) throws SQLException, Exception {
         DAO dao = new DAO();
-        dao.Insert(user);
+        DTO user = dao.checkLogin(userid, pass);
+        assertNotNull(user);
     }
-
-    //4
-    @Test(dataProvider = "data-provider")
-    public void testInsertUserWithInvalidValue(String data, String data1, String data2, String data3, boolean boo) throws SQLException, Exception {
-        DTO user = new DTO(data, data1, data2, data3, boo);
-        DAO dao = new DAO();
-        boolean expected = false;
-        boolean check = dao.Insert(user);
-        assertEquals(check, expected);
-    }
-    
-    //5
-//    @Test(dataProvider = "data-provider")
-//    public void testGetUserInfoByUserIdWithValidValue(){
-//        
-//    }
-
-//    @DataProvider(name = "data-provider")
-//    public Object[][] dataProviderMethod() {
-//        return new Object[][]{
-//            {" ", "trinhcongtruong", "1", "AD", true},
-//            {"Lorem Ipsum is simply dummy text of the printing and typesetting industry."
-//                + " Lorem Ipsum has been the industry's standard dummy text ever since the 1500s"
-//                + ",when an unknown printer took a galley of type and scrambled it to make a type",
-//                "trinhcongtruong1", "1", "AD", true},
-//            {"c2313", "trinhcongtruong1", "1", "AD", true}
-//        };
-//    }
-//    
-    // insert valid value
-//   /
-    //  insert null value
-//    @Test(expectedExceptions = Exception.class)
-//    public void testInsertUserWithNullUserId() throws SQLException, Exception {
-//        DTO user = new DTO();
-//        user.setUserID("");
-//        user.setFullName("truongđwcoưqengchinh");
-//        user.setPassword("1");
-//        user.setRoleID("AD");
-//        user.setStatus(true);
-//        DAO dao = new DAO();
-//        dao.Insert(user);
-//    }
-//    
-//    //insert valid value
-//    @Test(enabled = true)
-//    public void testInsertUserWithValidValue() throws SQLException, Exception {
-//        DTO user = new DTO();
-//        user.setUserID("sv1212322221");
-//        user.setFullName("truongđwcoưqengchinh");
-//        user.setPassword("1");
-//        user.setRoleID("AD");
-//        user.setStatus(true);
-//        DAO dao = new DAO();
-//        dao.Insert(user);
-//    }
-//    
-//    //insert duplicate value
-//    @Test(expectedExceptions = Exception.class)
-//    public void testInsertUserWithDuplicateValue() throws SQLException, Exception {
-//        DTO user = new DTO();
-//        user.setUserID("sv121");
-//        user.setFullName("truongđwcoưqengchinh");
-//        user.setPassword("1");
-//        user.setRoleID("AD");
-//        user.setStatus(true);
-//        DAO dao = new DAO();
-//        dao.Insert(user);
-//    }
-    //get user by user id
-//    @Test(expectedExceptions = Exception.class)
-//    public void testGetUserInfoByUserIdWithValidValue() throws SQLException, Exception {
-//        DAO dao = new DAO();
-//        dao.getUserInfor("sdwd");
-//    }
-    //get user not exist
-    @Test(expectedExceptions = Exception.class)
-    public void testGetUserInfoByUserIdWithInvalidValue() throws SQLException, Exception {
-        DAO dao = new DAO();
-        dao.getUserInfor("sdwd");
-    }
-    //Delete user by user id
-//    @Test
-//    public void testDeleteUserByUserIdWithInvalidValue() throws SQLException, Exception {
-//        DAO dao = new DAO();
-//        boolean check = dao.deleteUser("dwdqwd");
-//        assertEquals(check, false);
-//    }
 }

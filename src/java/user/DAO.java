@@ -29,12 +29,10 @@ public class DAO {
     private static final String INSERT = " INSERT INTO tblUsers( userID, fullName, roleID, password, status) VALUES (?,?,?,?,?) ";
 
     public DTO checkLogin(String userID, String pass) throws SQLException, Exception {
-
         DTO user = null;
         Connection conn = null;
         PreparedStatement stm = null;
         ResultSet rs = null;
-
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
@@ -62,7 +60,6 @@ public class DAO {
             if (conn != null) {
                 conn.close();
             }
-
         }
         return user;
     }
@@ -156,12 +153,10 @@ public class DAO {
     }
 
     public DTO getUserInfor(String userID) throws SQLException, Exception {
-
         DTO user = null;
         Connection conn = null;
         PreparedStatement stm = null;
         ResultSet rs = null;
-
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
@@ -173,12 +168,10 @@ public class DAO {
                     String roleID = rs.getString("roleID");
                     boolean status = rs.getBoolean("status");
                     user = new DTO(userID, fullName, roleID, "", status);
-                } else {
-                    throw new Exception();
-                }
+                } 
             }
         } catch (Exception e) {
-            throw new Exception();
+            e.printStackTrace();
         } finally {
             if (rs != null) {
                 rs.close();
@@ -189,7 +182,6 @@ public class DAO {
             if (conn != null) {
                 conn.close();
             }
-
         }
         return user;
     }
