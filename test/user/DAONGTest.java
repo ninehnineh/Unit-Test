@@ -42,7 +42,7 @@ public class DAONGTest {
         return data;
     }
 
-    @Test(dataProvider = "data-provider" , enabled = false)
+    @Test(dataProvider = "data-provider")
     public void testInsertUserWithValidValue(String data, String data1, String data2, String data3, boolean boo) throws SQLException, Exception {
         DAO dao = new DAO();
         DTO user = new DTO(data, data1, data2, data3, boo);
@@ -51,7 +51,7 @@ public class DAONGTest {
         assertEquals(actual, expected);
     }
 
-    @Test(dataProvider = "data-provider" , enabled = false)
+    @Test(dataProvider = "data-provider")
     public void testInsertUserWithInvalidValue(String data, String data1, String data2, String data3, boolean boo) throws SQLException, Exception {
         DAO dao = new DAO();
         DTO user = new DTO(data, data1, data2, data3, boo);
